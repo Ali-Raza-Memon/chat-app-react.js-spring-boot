@@ -2,8 +2,11 @@ package com.fastech.chatapp.config;
 
 import com.fastech.chatapp.model.Message;
 import com.fastech.chatapp.model.Status;
+import com.fastech.chatapp.model.User;
+import com.fastech.chatapp.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
@@ -14,7 +17,8 @@ import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 @RequiredArgsConstructor
 @Slf4j
 public class WebSocketEventListener {
-
+    @Autowired
+    private UserRepository userRepository;
     private final SimpMessageSendingOperations messageTemplate;
 
     @EventListener
@@ -23,6 +27,9 @@ public class WebSocketEventListener {
         String username = (String) headerAccessor.getSessionAttributes().get("username");
         if(username != null){
             log.info("User disconnected: {}",username);
+            User user = userRepository.findUserByUsername(username);
+            user.setActive(false);
+            userRepository.save(user);
             var chatMessage = Message.builder()
                     .status(Status.LEAVE)
                     .senderName(username)
@@ -30,5 +37,4 @@ public class WebSocketEventListener {
             messageTemplate.convertAndSend("/chatroom/public",chatMessage);
         }
     }
-
 }
