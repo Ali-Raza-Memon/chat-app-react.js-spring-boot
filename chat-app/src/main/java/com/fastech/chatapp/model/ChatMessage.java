@@ -23,8 +23,5 @@ public class ChatMessage {
     @JsonIgnore
     private User user;
 
-    @OneToMany(mappedBy = "chatMessage", cascade = CascadeType.ALL)
-    @JsonIgnore
-    List<ChatGroup_Message> groupMessages;
 
 }

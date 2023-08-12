@@ -16,8 +16,7 @@ import java.util.List;
 public class ChatGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    @Column(name = "group")
+    private Long id;
     private String groupName;
     @CreatedDate
     private Date createdAt;

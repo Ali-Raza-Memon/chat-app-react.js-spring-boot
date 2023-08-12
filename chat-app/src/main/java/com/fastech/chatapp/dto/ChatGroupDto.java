@@ -8,8 +8,7 @@ import javax.persistence.Column;
 @Setter
 @Getter
 public class ChatGroupDto {
-    private Integer id;
-
+    private Long id;
     private String groupName;
     private String userName;
 }

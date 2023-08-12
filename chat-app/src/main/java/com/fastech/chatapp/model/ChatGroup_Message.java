@@ -14,12 +14,16 @@ public class ChatGroup_Message {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String message;
+
     @ManyToOne
     @JsonIgnore
     ChatGroup chatGroup;
     @ManyToOne
     @JsonIgnore
-    ChatMessage chatMessage;
+    User user;
+
+
 
 
 }

@@ -2,10 +2,13 @@ package com.fastech.chatapp.service;
 
 import com.fastech.chatapp.dto.ChatGroupDto;
 import com.fastech.chatapp.model.ChatGroup;
+
 import com.fastech.chatapp.model.ChatGroup_Message;
 import com.fastech.chatapp.model.ChatGroup_User;
 import com.fastech.chatapp.model.User;
+import com.fastech.chatapp.repository.ChatGroupMessageRepository;
 import com.fastech.chatapp.repository.ChatGroupRepository;
+
 import com.fastech.chatapp.repository.ChatGroupUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +23,7 @@ public class ChatGroupService {
     private UserService userService;
     @Autowired
     private ChatGroupUserRepository groupUserRepository;
+
 
     //username
     //groupname
